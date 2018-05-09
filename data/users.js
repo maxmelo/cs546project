@@ -7,7 +7,7 @@ const users = mongoCollections.users;
 module.exports = {
 
     createUser : async (username, password, name, bio) => {
-        if(!username || password) throw "Please provide a username and password";
+        if(!username || !password) throw "Please provide a username and password";
         const userCollection = await users();
         
         if(await userCollection.findOne({username: username})){
@@ -15,11 +15,12 @@ module.exports = {
         }
 
         const hashed = await bcrypt.hash(password, 16);
+
         const newUser = {
             _id: uuid(),
             sId: null,
             username: username,
-            password: password,
+            // password: password,
             hashedPassword: hashed,
             name: name,
             bio: bio,
@@ -44,6 +45,13 @@ module.exports = {
         const user = await userCollection.findOne({username: username});
         if(user) return user;
         else throw "Error: could not find user with this username";
+    },
+
+    getUserByUsernameBool : async (username) => {
+        const userCollection = await users();
+        const user = await userCollection.findOne({username: username});
+        if(user) return true;
+        else return false;
     },
 
     getUserById : async (_id) => {

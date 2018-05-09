@@ -1,0 +1,16 @@
+<section>
+    <p><a href="/logout"> Click to sign out </a></p>
+
+    <h3> Welcome {{{name}}}!</h3>
+
+    <p> Bio: {{{bio}}}</p>
+
+
+{{!-- FileHistory NEEDS to be changed to an array, and we append with the object structure we currently have--}}
+    {{#each FileHistory}}
+    <p>File 1: {{{fileName1}}}</p>
+    <p>File 2: {{{fileName2}}}</p>
+    <p>Similarity: {{{similarity}}}</p>
+    {{/each}}
+
+</section>
