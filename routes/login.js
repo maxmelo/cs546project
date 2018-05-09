@@ -21,25 +21,19 @@ async function authenticate(username, password) {
     }
 }
 
+
+
 router.get("/", (req, res) => {
     if (req.cookies.AuthCookie) {
         res.redirect("/userpage");
     } else {
         res.render("main/login", {});
     }
-})
-
-router.get("/login", (req, res) => {
-    if (req.cookies.AuthCookie) {
-        res.redirect("/userpage");
-    } else {
-        res.render("main/login", {});
-    }
-})
+});
 
 
 
-router.post("/login", async (req, res) => {
+router.post("/", async (req, res) => {
     let authenticated = false;
     const username = req.body['login-username'];
     const password = req.body['login-password'];

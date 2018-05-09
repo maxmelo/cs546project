@@ -1,21 +1,38 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{{title}}}</title>
-    {{!-- <link rel="stylesheet" href="/public/css/main.css"> --}}
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{{title}}}</title>
+        <link rel="stylesheet" href="site.css">
+    </head>
 
-<body>
-    <main>
-        {{{body}}}
-    </main>
-    <h3>
-        {{{successText}}}
-    </h3>
-    <h3>
-        {{{failureText}}}
-    </h3>
-</body>
+    <header>
+        <h1>file comparison</h1>
+        <div class="wrapper">
+            {{#if hasAuth}}
+                <h2>Welcome back, {{authName}}</h2>
+                <form id="userpage-redirect" action="/userpage" method="get"></form>
+                <button form="userpage-redirect" value="Submit">Userpage</button>
+                                
+                <form id="logout-redirect" action="/logout" method="get"></form>
+                <button form="logout-redirect" value="Submit">Logout</button>
+            {{else}}
+                <form id="login-redirect" action="/login" method="get"></form>
+                <button form="login-redirect" value="Submit">login</button>
+            {{/if}}
+        </div>
+    </header>
+
+    <body>
+        <main>
+            {{{body}}}
+        </main>
+        <h3>
+            {{{successText}}}
+        </h3>
+        <h3>
+            {{{failureText}}}
+        </h3>
+    </body>
 </html>

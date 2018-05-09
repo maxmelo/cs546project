@@ -23,6 +23,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
+    "fast-levenshtein": "^2.0.6",
     "mongodb": "^3.0.8",
     "uuid": "^3.2.1"
   }

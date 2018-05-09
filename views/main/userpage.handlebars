@@ -1,16 +1,19 @@
-<section>
-    <p><a href="/logout"> Click to sign out </a></p>
+<section class="userpage">
+    <div class="wrapper">
+        <h3> Welcome {{{name}}}!</h3>
+        <br/>
+        <p> Bio: {{{bio}}}</p>
 
-    <h3> Welcome {{{name}}}!</h3>
+        <br/>
+        {{!-- FileHistory NEEDS to be changed to an array, and we append with the object structure we currently have--}}
+        {{#each FileHistory}}
+        <p>File 1: {{{fileName1}}}</p>
+        <p>File 2: {{{fileName2}}}</p>
+        <p>Similarity: {{{similarity}}}</p><br/>
+        {{/each}}
 
-    <p> Bio: {{{bio}}}</p>
-
-
-{{!-- FileHistory NEEDS to be changed to an array, and we append with the object structure we currently have--}}
-    {{#each FileHistory}}
-    <p>File 1: {{{fileName1}}}</p>
-    <p>File 2: {{{fileName2}}}</p>
-    <p>Similarity: {{{similarity}}}</p>
-    {{/each}}
-
+        <p><a href="/logout"> Click to sign out </a></p>
+        <br/>
+        <p><a href="/"> Back to main page </a></p>
+    </div>
 </section>

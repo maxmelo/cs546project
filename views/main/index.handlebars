@@ -1,0 +1,20 @@
+<section class="index">
+    <h2>input your files below</h2>
+    <div id="textinputs">
+        <form id="submitform" action="/results" name="submitform" method="post"></form>
+        <div id="left">
+            <h3>file 1</h3>
+                <textarea name="file1text" form="submitform" id="text-left"></textarea>
+            </form>
+        </div>
+        <div id="right">
+            <h3>file 2</h3>
+            <form action="/results" name="file2form" method="post">
+                <textarea name="file2text" form="submitform" id="text-right"></textarea>
+            </form>
+        </div>  
+    </div>
+    <div id="controls">
+        <button id="submit" form="submitform" value="Submit">check differences</button>
+    </div>
+</section>

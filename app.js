@@ -8,9 +8,9 @@ const static = express.static(__dirname + "/public");
 const configRoutes = require("./routes");
 const exphbs = require("express-handlebars");
 
-app.use("/public", static);
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cookieParser());
 app.use(bodyParser.json()); // for parsing application/json

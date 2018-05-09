@@ -1,34 +1,37 @@
-<section>
-    <form action="/newaccount" method="POST" class="new-form">
-    <label for="new-username">
-        Username:
-    </label>
-    <input type="text" name="new-username" id="new-username" placeholder="" value=""/>
-    <br><br>
+<section class="newaccount">
+    <div class="wrapper">
+        <h1>New account</h1>
+        <form action="/newaccount" method="POST" class="new-form">
+            <label for="new-username">
+                Username:
+            </label>
+            <input type="text" name="new-username" id="new-username" placeholder="" value=""/>
+            <br/>
+            <label for="new-password">
+                Password:
+            </label>
+            <input type="password" name="new-password" id="new-password" placeholder="" value=""/>
+            <br/>
 
-    <label for="new-password">
-        Password:
-    </label>
-    <input type="password" name="new-password" id="new-password" placeholder="" value=""/>
-    <br><br>
+            <label for="new-password-confirm">
+                Confirm Password:
+            </label>
+            <input type="password" name="new-password-confirm" id="new-password-confirm" placeholder="" value=""/>
+            <br/>
 
-    <label for="new-password-confirm">
-        Confirm Password:
-    </label>
-    <input type="password" name="new-password-confirm" id="new-password-confirm" placeholder="" value=""/>
-    <br><br>
+            <label for="new-name">
+                Real Name:
+            </label>
+            <input type="text" name="new-name" id="new-name" placeholder="" value="" cols="50" rows="5"/>
+            <br/>
 
-    <label for="new-name">
-        Name (not for logging in):
-    </label>
-    <input type="text" name="new-name" id="new-name" placeholder="" value="" cols="50" rows="5"/>
-    <br><br>
+            <label for="new-bio">
+                Short Bio:
+            </label>
+            <input type="text" name="new-bio" id="new-bio" placeholder="" value="" cols="50" rows="5"/>
 
-    <label for="new-bio">
-        Short Bio:
-    </label>
-    <input type="text" name="new-bio" id="new-bio" placeholder="" value="" cols="50" rows="5"/>
-    <button type="submit">Submit</button>
-    
-    </form>
+            <br/>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </section>
