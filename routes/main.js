@@ -14,6 +14,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/results", async (req, res) => {
+    let authName = "";
+    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.username;
+
     const json = req.body;
 
     if (!("file1text" in json) || !("file2text" in json)) res.redirect("error");
@@ -29,6 +32,8 @@ router.post("/results", async (req, res) => {
 
     //Sample values, fill these in with the result of comparison
     res.render("main/results", { 
+        hasAuth: req.cookies.AuthCookie !== undefined,
+        authName: authName,
         similarity: metricSimilarity,
         sharedWords: metricSharedWords,
         totalWords: metricTotalWords,
