@@ -5,7 +5,7 @@ const compare = require("../func/compare");
 
 router.get("/", (req, res) => {
     let authName = "";
-    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.username;
+    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.name;
 
     res.render("main/index", {
         hasAuth: req.cookies.AuthCookie !== undefined,
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 router.post("/results", async (req, res) => {
     let authName = "";
-    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.username;
+    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.name;
 
     const json = req.body;
 

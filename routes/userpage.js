@@ -4,11 +4,11 @@ const users = require("../data/users");
 
 router.get("/", (req, res) => {
     let authName = "";
-    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.username;
+    if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.name;
 
     if (req.cookies.AuthCookie) {
         const userInfo = req.cookies.AuthCookie;
-        
+
         userInfo["hasAuth"] = req.cookies.AuthCookie !== undefined;
         userInfo["authName"] = authName;
 
