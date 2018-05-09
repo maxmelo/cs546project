@@ -13,13 +13,25 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/error", (req, res) => {
+    res.status(400).send("Missing field");
+    res.redirect("/");
+});
+
 router.post("/results", async (req, res) => {
     let authName = "";
     if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.name;
 
     const json = req.body;
-
-    if (!("file1text" in json) || !("file2text" in json)) res.redirect("error");
+    console.log(json);
+    if (
+        !("file1text" in json && json["file1text"].length > 0) 
+        || !("file2text" in json && json["file2text"].length > 0)
+        || !("filename-right" in json && json["filename-right"].length > 0) 
+        || !("filename-left" in json && json["filename-left"].length > 0)) {
+            res.redirect("/");
+            return;
+    }
 
     const file1 = json["file1text"];
     const file2 = json["file2text"];

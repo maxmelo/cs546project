@@ -4,17 +4,39 @@
         <form id="submitform" action="/results" name="submitform" method="post"></form>
         <div id="left">
             <h3>file 1</h3>
-                <textarea name="file1text" form="submitform" id="text-left"></textarea>
-            </form>
+            <input class="filename-input" form="submitform" name="filename-left" id="filename-left" type="text" placeholder="filename">
+            <textarea name="file1text" form="submitform" id="text-left"></textarea>
+            <input class="file-input" type="file" onchange="onFile1Selected(event)">
         </div>
         <div id="right">
             <h3>file 2</h3>
-            <form action="/results" name="file2form" method="post">
-                <textarea name="file2text" form="submitform" id="text-right"></textarea>
-            </form>
+            <input class="filename-input" form="submitform" name="filename-right" id="filename-right" type="text" placeholder="filename">
+            <textarea name="file2text" form="submitform" id="text-right"></textarea>
+            <input class="file-input" type="file" onchange="onFile2Selected(event)">
         </div>  
     </div>
     <div id="controls">
         <button id="submit" form="submitform" value="Submit">check differences</button>
     </div>
+    <script>
+        function onFile1Selected(event) { fileSelected(0, event); }
+        function onFile2Selected(event) { fileSelected(1, event); }
+
+        function fileSelected(which, event) {
+            var selectedFile = event.target.files[0];
+            var reader = new FileReader();
+
+            var filename = document.getElementById(which == 0 ? "filename-left" : "filename-right");
+            var filetext = document.getElementById(which == 0 ? "text-left" : "text-right");
+
+            reader.onload = function(event) { 
+                let fname =  /(.+)(?:\..+)$/.exec(selectedFile.name)[1];
+                filename.value = fname;
+                filetext.innerHTML = event.target.result; 
+            };
+            
+
+            reader.readAsText(selectedFile);
+        }
+    </script>
 </section>
