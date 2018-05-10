@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid/v4');
 const users = mongoCollections.users;
 
-
 module.exports = {
 
     createUser : async (username, password, name, bio) => {
@@ -24,14 +23,7 @@ module.exports = {
             hashedPassword: hashed,
             name: name,
             bio: bio,
-            FileHistory: {
-                comparisonId: null,
-                fileName1: null,
-                fileName2: null,
-                similarity: null,
-                wordMatch: null,
-                lineMatch: null
-            }
+            FileHistory: []        
         };
 
         const userData = await userCollection.insertOne(newUser);
@@ -74,8 +66,7 @@ module.exports = {
             const validate = await bcrypt.compare(password, user.hashedPassword);
             return validate;
         }
-        else throw "Error: could not find User";
-        
+        else throw "Error: could not find User";  
     },
 
     //Add user's past comparisons to Userpage
@@ -99,7 +90,6 @@ module.exports = {
         });
         return newComparison;
     }
-
 }
     
 
