@@ -8,7 +8,11 @@
     </head>
 
     <header>
-        <h1>file comparison</h1>
+        <a href="/" style="text-decoration:none;">
+            <div>
+                <h1>file comparison</h1>
+            </div>
+        </a>
         <div class="wrapper">
             {{#if hasAuth}}
                 <h2>Welcome back, {{authName}}</h2>
@@ -28,11 +32,5 @@
         <main>
             {{{body}}}
         </main>
-        <h3>
-            {{{successText}}}
-        </h3>
-        <h3>
-            {{{failureText}}}
-        </h3>
     </body>
 </html>

@@ -136,3 +136,10 @@ section.login h1, section.newaccount h1 { color: #222; text-align: center; }
 section.newaccount input, section.newaccount button,
 section.login input, section.login button { width: 100%; }
 
+.successText {
+    color: green
+}
+
+.failureText {
+    color: red
+}
