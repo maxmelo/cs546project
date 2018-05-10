@@ -2,12 +2,19 @@ const express = require("express");
 const router = express.Router();
 const users = require("../data/users");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     let authName = "";
     if (req.cookies.AuthCookie !== undefined) authName = req.cookies.AuthCookie.name;
 
     if (req.cookies.AuthCookie) {
-        const userInfo = req.cookies.AuthCookie;
+        let userInfo = req.cookies.AuthCookie;
+
+        const currUser = await users.getUserById(userInfo._id);
+        const history = currUser.FileHistory;
+
+        userInfo.FileHistory = history;
+
+        res.cookie("AuthCookie", userInfo);
 
         userInfo["hasAuth"] = req.cookies.AuthCookie !== undefined;
         userInfo["authName"] = authName;

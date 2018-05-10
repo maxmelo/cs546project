@@ -2,16 +2,6 @@ const express = require("express");
 const router = express.Router();
 const users = require("../data/users");
 
-async function usernameExists(username) {
-    var bool = false;
-    try {
-        users.getUserByUsername(username);
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
 router.get("/", (req, res) => {
     res.render("main/newaccount", {});
 })

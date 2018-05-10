@@ -79,7 +79,11 @@ module.exports = {
         const newComparison = {
             fileName1: fileName1,
             fileName2: fileName2,
-            similarity: similarity
+            similarityPercent: similarity.similarityPercent,
+            sharedWords: similarity.sharedWords,
+            sharedChars: similarity.sharedChars,
+            totalWords: similarity.totalWords,
+            totalChars: similarity.totalChars
         }
 
         const update = await userCollection.updateOne(

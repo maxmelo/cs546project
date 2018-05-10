@@ -39,9 +39,7 @@ router.post("/", async (req, res) => {
     const password = req.body['login-password'];
 
     try {
-        console.log("Begin authenticate.");
         authenticated = await users.validatePassword(username, password);
-        console.log("End authenticate.");
     } catch(e) {
         console.log(e);
     }    
