@@ -93,7 +93,7 @@ module.exports = {
 
         const update = await userCollection.updateOne(
             { _id: _id}, 
-            { $addToSet: {
+            { $push: {
                 FileHistory: newComparison
             },
         });
