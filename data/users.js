@@ -76,6 +76,28 @@ module.exports = {
         }
         else throw "Error: could not find User";
         
+    },
+
+    //Add user's past comparisons to Userpage
+    updateUserHistory : async (_id, fileName1, fileName2, similarity) => {
+        const userCollection = await users();
+        const user = await userCollection.findOne({_id: _id});
+
+        if (!user) throw "could not find user with this id";
+
+        const newComparison = {
+            fileName1: fileName1,
+            fileName2: fileName2,
+            similarity: similarity
+        }
+
+        const update = await userCollection.updateOne(
+            { _id: _id}, 
+            { $addToSet: {
+                FileHistory: newComparison
+            },
+        });
+        return newComparison;
     }
 
 }
