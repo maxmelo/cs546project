@@ -1,4 +1,7 @@
 <section class="index">
+    <div class="col-sm-12 col-md-6" id="single-result-area">
+        {{!-- {{#if similarity}} {{> results }} {{/if}} --}}
+    </div>
     <h2>input your files below</h2>
     <div id="textinputs">
         <form id="submitform" action="/results" name="submitform" method="post"></form>
@@ -18,6 +21,13 @@
     <div id="controls">
         <button id="submit" form="submitform" value="Submit">check differences</button>
     </div>
+    <h3 class="successText">
+        {{{successText}}}
+    </h3>
+    <h3 class="failureText">
+        {{{failureText}}}
+    </h3>
+    
     <script>
         function onFile1Selected(event) { fileSelected(0, event); }
         function onFile2Selected(event) { fileSelected(1, event); }
