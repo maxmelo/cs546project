@@ -7,24 +7,40 @@ const static = express.static(__dirname + "/public");
 
 const configRoutes = require("./routes");
 const exphbs = require("express-handlebars");
+const Handlebars = require('handlebars');
+
+const handlebarsInstance = exphbs.create({
+  defaultLayout: 'main',
+  // Specify helpers which are only registered on this instance.
+  helpers: {
+      asJSON: (obj, spacing) => {
+          if (typeof spacing === "number")
+              return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
+
+          return new Handlebars.SafeString(JSON.stringify(obj));
+      }
+  },
+  partialsDir: [
+      'views/partials/'
+  ]
+});
+
+
+
 
 app.use(express.static(__dirname + "/public"));
+app.use("/public", static);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cookieParser());
 app.use(bodyParser.json()); // for parsing application/json
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.engine('handlebars', handlebarsInstance.engine);
+app.set('view engine', 'handlebars');
 
 configRoutes(app);
-
-const main = async () => {
-  const andrew = await users.createUser("userAndrew", "asdf", "Andrew", "This is a test account.");
-}
-
-main();
 
 app.listen(3000, () => {
   console.log("We've now got a server!");
