@@ -12,14 +12,15 @@ router.get("/", async (req, res) => {
         const currUser = await users.getUserById(userInfo._id);
         const history = currUser.FileHistory;
 
-        userInfo.FileHistory = history;
+        var temp = {};
 
-        res.cookie("AuthCookie", userInfo);
+        temp.FileHistory = history;
+        temp.hasauth
 
-        userInfo["hasAuth"] = req.cookies.AuthCookie !== undefined;
-        userInfo["authName"] = authName;
+        temp["hasAuth"] = req.cookies.AuthCookie !== undefined;
+        temp["authName"] = authName;
 
-        res.render("main/userpage", userInfo)
+        res.render("main/userpage", temp);
     } else {
         res.redirect("/login");
         res.render("main/login", {

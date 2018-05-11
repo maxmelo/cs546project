@@ -44,14 +44,18 @@ router.post("/", async (req, res) => {
         console.log(e);
     }    
     if (authenticated) {
-        let userInfo;
+        var userInfo = false;
         try {
             userInfo = await users.getUserByUsername(username);
         } catch (e) {
             console.log(e);
         }
         delete userInfo.hashedPassword;
+        //Delete fileHistory. If FileHistory is too large, userInfo won't fit in a cookie.
+        delete userInfo.FileHistory;
+
         res.cookie("AuthCookie", userInfo);
+
         res.redirect("/userpage");
     } else {
         res.render("main/login", {failureText: "Invalid username/password provided."})
