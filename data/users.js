@@ -119,6 +119,7 @@ module.exports = {
         return newComparison;
     },
 
+<<<<<<< HEAD
     //remove a single file comparison from the user's history
     removeComparison : async (_id, cId) => {
         const userCollection = await users();
@@ -138,6 +139,8 @@ module.exports = {
         return remove;
     },
 
+=======
+>>>>>>> a731bea88274ab2c87dfe8e59d0b5a36ee8b2158
     //completely clear a user's file comparison history
     removeComparisonHistory : async (_id) => {
         const userCollection = await users();
