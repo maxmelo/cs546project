@@ -143,3 +143,5 @@ section.login input, section.login button { width: 100%; }
 .failureText {
     color: red
 }
+
+section.userpage a { font-family: Roboto-Light; }
