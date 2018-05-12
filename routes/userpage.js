@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
 
     if (req.cookies.AuthCookie) {
         let userInfo = req.cookies.AuthCookie;
+        const id = userInfo._id;
 
         const currUser = await users.getUserById(userInfo._id);
         const history = currUser.FileHistory;
@@ -17,8 +18,14 @@ router.get("/", async (req, res) => {
         temp.FileHistory = history;
         temp.hasauth
 
+        temp.bio = currUser.bio;
         temp["hasAuth"] = req.cookies.AuthCookie !== undefined;
         temp["authName"] = authName;
+        temp.id = id;
+
+        for (var i = 0; i < temp.FileHistory.length; i++) {
+            temp.FileHistory[i].id = id;
+        }
 
         res.render("main/userpage", temp);
     } else {

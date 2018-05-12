@@ -43,7 +43,6 @@ router.post("/", async (req, res) => {
     else {
         try {
             const newUser = await users.createUser(username, password, name, bio);
-            console.log(newUser);
             res.render("main/login", {successText: "Account creation successful! Try logging in."});
             return newUser;
         } catch (e) {

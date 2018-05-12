@@ -58,7 +58,6 @@ dbConnection().then(db => {
     }).then((update) => {
         return users.updateUserHistorySeed(id, "Mosaic Plagiarism", "Mosaic Original", mosaicPlagiarism, mosaicOriginal);
     }).then(() => {
-        db.close();
         console.log("Done seeding database");
     });
 }, (error) => {

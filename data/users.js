@@ -6,6 +6,7 @@ const compare = require("../func/compare.js");
 
 module.exports = {
 
+    //create a new user
     createUser : async (username, password, name, bio) => {
         if(!username || !password) throw "Please provide a username and password";
         const userCollection = await users();
@@ -33,6 +34,7 @@ module.exports = {
         return newUser;
     },
 
+    //find a user by their username
     getUserByUsername : async (username) => {
         const userCollection = await users();
         const user = await userCollection.findOne({username: username});
@@ -47,23 +49,38 @@ module.exports = {
         else return false;
     },
 
+    //find user by their id
     getUserById : async (_id) => {
         const userCollection = await users();
         const user = await userCollection.findOne({_id: _id});
-        if(user) return user;
+        if (user) return user;
         else throw "Error: could not find user with this id";
     },
 
+    //removes a user from the database
+    removeUser : async (_id) => {   
+        if (!_id) throw "Error: please provide a user id";
+        const userCollection = await users();
+        const user = await userCollection.findOne({_id: _id});
+        
+        if (!user) throw "Error: could not find user with this id";
+        const remove = await userCollection.removeOne({_id: _id});
+        if (remove.removedCount === 0) throw "Error: could not remove this user";
+
+    },
+
+    //find all users in the database
     getAllUsers : async () => {
         const userCollection = await users();
         const get= await userCollection.find({}).toArray();
         return get;
     },  
 
+    //validates a user's password using bcrypt
     validatePassword : async (username, password) => {
         const userCollection = await users();
         const user = await userCollection.findOne({username : username});
-        if(user){
+        if (user){
             const validate = await bcrypt.compare(password, user.hashedPassword);
             return validate;
         }
@@ -82,6 +99,7 @@ module.exports = {
 
 
         const newComparison = {
+            cId: uuid(),
             fileName1: fileName1,
             fileName2: fileName2,
             similarityPercent: similarity.similarityPercent,
@@ -99,6 +117,57 @@ module.exports = {
             },
         });
         return newComparison;
+    },
+
+    //remove a single file comparison from the user's history
+    removeComparison : async (_id, cId) => {
+        const userCollection = await users();
+        const user = await userCollection.findOne({_id: _id});
+
+        if(!user) throw "Error: could not find user with this id";
+
+        const remove = await userCollection.updateOne(
+            { _id: _id },
+            { $pull: {
+                FileHistory: {cId: cId}
+            }
+        });
+
+        const user2 = await userCollection.findOne({_id:_id});
+        
+        return remove;
+    },
+
+    //completely clear a user's file comparison history
+    removeComparisonHistory : async (_id) => {
+        const userCollection = await users();
+        const user = await userCollection.findOne({_id: _id});
+
+        if(!user) throw "Error: could not find user with this id";
+
+        const remove = await userCollection.updateOne(
+            { _id: _id },
+            { $set: {
+                FileHistory: []
+            }
+        });
+        return remove;
+    },
+
+    //update a user's account bio
+    updateBio : async (_id, bio) => {
+        const userCollection = await users();
+        const user = await userCollection.findOne({_id: _id});
+
+        if(!user) throw "Error: could not find user with this id";
+
+        const update = await userCollections.updateOne(
+            { _id: _id },
+            { $set: {
+                bio: bio
+            }
+        });
+        return update;
     },
 
     updateUserHistorySeed : async (_id, file1name, file2name, file1, file2) => {
@@ -124,6 +193,7 @@ module.exports = {
 
 
         const newComparison = {
+            cId: uuid(),
             fileName1: file1name,
             fileName2: file2name,
             similarityPercent: similarity.similarityPercent,
@@ -143,12 +213,4 @@ module.exports = {
 
         return newComparison;
     }
-
-
-
 }
-    
-
-
-
-
