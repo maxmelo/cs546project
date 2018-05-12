@@ -119,24 +119,8 @@ module.exports = {
         return newComparison;
     },
 
-    //remove a single file comparison from the user's history
-    removeComparison : async (_id, cId) => {
-        const userCollection = await users();
-        const user = await userCollection.findOne({_id: _id});
-
-        if(!user) throw "Error: could not find user with this id";
-
-        const remove = await userCollection.updateOne(
-            { _id: _id },
-            { $pull: {
-                FileHistory: cId
-            }
-        });
-        return remove;
-    },
-
     //completely clear a user's file comparison history
-    removeComparisonHistory : async (_id, cId) => {
+    removeComparisonHistory : async (_id) => {
         const userCollection = await users();
         const user = await userCollection.findOne({_id: _id});
 
